@@ -1,0 +1,36 @@
+import tkinter as tk
+
+quran_data = {
+    1: "In the name of Allah, the Most Gracious, the Most Merciful.",
+    2: "Praise be to Allah, the Lord of all the worlds.",
+    # Add more verses here...
+    114: "Say, 'I seek refuge in the Lord of mankind,'"
+}
+
+class QuranApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Quran App")
+        
+        self.verse_number = tk.IntVar()
+        self.verse_number.set(1)
+        
+        self.verse_label = tk.Label(root, text="")
+        self.verse_label.pack()
+        
+        self.verse_entry = tk.Entry(root, textvariable=self.verse_number)
+        self.verse_entry.pack()
+        
+        self.show_verse_button = tk.Button(root, text="Show Verse", command=self.show_verse)
+        self.show_verse_button.pack()
+        
+    def show_verse(self):
+        verse_number = self.verse_number.get()
+        verse_text = quran_data.get(verse_number, "Verse not found.")
+        self.verse_label.config(text=verse_text)
+        
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = QuranApp(root)
+    root.mainloop()
